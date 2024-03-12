@@ -7,6 +7,8 @@ import org.example.Estadisticas.Razas
 import org.example.Mapas.Movimiento
 import org.example.Personajes.Gottens
 import org.example.Personajes.Villanos
+import org.example.Consola
+
 import kotlin.random.Random
 
 class Peleas(private val gottens: Gottens, private val villanos: Villanos, private val dificultad: Dificultad) {
@@ -19,18 +21,18 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
 
             Pelea(gottens,villanos).mostrarMapa()
             iniciarPelea(gottens, villanos )
-            println("Estado actual de la pelea:")
-            println("Vida de Gottens: ${gottens.estadisticas.salud}")
-            println("Vida del villano: ${villanos.estadisticas.salud}")
+            Consola().printer("Estado actual de la pelea:")
+            Consola().printer("Vida de Gottens: ${gottens.estadisticas.salud}")
+            Consola().printer("Vida del villano: ${villanos.estadisticas.salud}")
         }
 
         if (gottens.estadisticas.salud <= 0) {
-            println("¡Has perdido la pelea!")
+            Consola().printer("¡Has perdido la pelea!")
             Movimiento().mover(gottens, villanos, dificultad)
         } else {
-            println("¡Has ganado la pelea!")
+            Consola().printer("¡Has ganado la pelea!")
             gottens.estadisticas.nivel += 10
-            println("Estado actual: ${ gottens.estadisticas }")
+            Consola().printer("Estado actual: ${ gottens.estadisticas }")
 
         }
     }
@@ -39,11 +41,11 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
 
     private fun turno(dificultad: Dificultad): Int {
         if (dificultad == Dificultad.EXTREMO){
-            println("Empieza el villano")
+            Consola().printer("Empieza el villano")
             return 2
 
         } else {
-            println("Empiezas")
+            Consola().printer("Empiezas")
             return 1
 
         }
@@ -53,16 +55,12 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
         if (turno == 1) {
             turno++
 
-            println("Elige un ataque:")
-            println("1. BOLAS")
-            println("2. KAMEKAMEHA")
-            println("3. KAIOKEN")
-            println("4. GOLPES")
+            Consola().printer("Elige un ataque:\n1. BOLAS\n2. KAMEKAMEHA\n3. KAIOKEN\n4. GOLPES")
 
             var ataqueElegido: TipoAtaques? = null
 
             while (ataqueElegido == null) {
-                val opcion = readln()
+                val opcion = Consola().leer().toString()
                 ataqueElegido = when (opcion) {
                     "1" -> TipoAtaques.BOLAS
                     "2" -> TipoAtaques.KAMEKAMEHA
@@ -108,57 +106,57 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
 
 
     private fun ataqueBoss(estadisticas: Estadisticas, ataque: TipoAtaques){
-        println("El villano Saiyan va realizar un ataque")
+        Consola().printer("El villano Saiyan va realizar un ataque")
         when (ataque){
             TipoAtaques.CASTIGODIVINO -> castigoDivino(estadisticas)
             TipoAtaques.KAMEKAMEHA -> kamekameha(estadisticas)
             TipoAtaques.KAIOKEN -> kaioKen(estadisticas)
             TipoAtaques.GOLPES -> golpes(estadisticas)
-            else -> println("A fallado")
+            else -> Consola().printer("A fallado")
         }
     }
 
     private fun ataqueSaiyan(estadisticas: Estadisticas, ataque: TipoAtaques){
-        println("El villano Saiyan va realizar un ataque")
+        Consola().printer("El villano Saiyan va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)
             TipoAtaques.KAMEKAMEHA -> kamekameha(estadisticas)
             TipoAtaques.KAIOKEN -> kaioKen(estadisticas)
             TipoAtaques.GOLPES -> golpes(estadisticas)
-            else -> println("A fallado")
+            else -> Consola().printer("A fallado")
         }
     }
 
 
     private fun ataqueTerricola(estadisticas: Estadisticas, ataque: TipoAtaques){
-        println("El villano Terricola va realizar un ataque")
+        Consola().printer("El villano Terricola va realizar un ataque")
         when (ataque){
             TipoAtaques.GOLPES -> golpes(estadisticas)
-            else -> println("A fallado")
+            else -> Consola().printer("A fallado")
         }
     }
 
 
     private fun ataqueNamekiano(estadisticas: Estadisticas, ataque: TipoAtaques){
-        println("El villano Namekiano va realizar un ataque")
+        Consola().printer("El villano Namekiano va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)
             TipoAtaques.MAKANKOSAPPO -> makankosappo(estadisticas)
             TipoAtaques.KAIOKEN -> kaioKen(estadisticas)
             TipoAtaques.GOLPES -> golpes(estadisticas)
-            else -> println("A fallado")
+            else -> Consola().printer("A fallado")
         }
     }
 
 
     private fun ataqueFreezer(estadisticas: Estadisticas, ataque: TipoAtaques){
-        println("El villano Namekiano va realizar un ataque")
+        Consola().printer("El villano Namekiano va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)
             TipoAtaques.SUPERNOVA -> supernova(estadisticas)
             TipoAtaques.KAIOKEN -> kaioKen(estadisticas)
             TipoAtaques.GOLPES -> golpes(estadisticas)
-            else -> println("A fallado")
+            else -> Consola().printer("A fallado")
         }
     }
 
@@ -236,4 +234,3 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
         }else 1
     }
 }
-enum class TipoAtaques{KAMEKAMEHA, BOLAS, KAIOKEN, GOLPES,MAKANKOSAPPO,SUPERNOVA,CASTIGODIVINO}

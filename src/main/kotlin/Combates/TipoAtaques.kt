@@ -1,0 +1,3 @@
+package org.example.Combates
+
+enum class TipoAtaques{KAMEKAMEHA, BOLAS, KAIOKEN, GOLPES,MAKANKOSAPPO,SUPERNOVA,CASTIGODIVINO}

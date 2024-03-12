@@ -1,6 +1,10 @@
-package org.example
+package org.example.Entrenamiento
 
-class Pelea(gottens: Gottens,villanos: Villanos) : Mapa() {
+import org.example.Personajes.Gottens
+import org.example.Mapas.Mapa
+import org.example.Personajes.Villanos
+
+class Pelea(gottens: Gottens, villanos: Villanos) : Mapa() {
     override fun mostrarMapa() {
         println(pelea)
     }

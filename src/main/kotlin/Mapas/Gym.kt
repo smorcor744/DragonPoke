@@ -1,4 +1,4 @@
-package org.example
+package org.example.Mapas
 
 class Gym : Mapa() {
     override var mapa: MutableList<MutableList<String>> = mutableListOf(

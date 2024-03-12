@@ -1,4 +1,6 @@
-package org.example
+package org.example.Estadisticas
+
+import org.example.Estadisticas.Dificultad
 
 class Porcentajes {
 

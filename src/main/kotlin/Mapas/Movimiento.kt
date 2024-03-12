@@ -1,4 +1,11 @@
-package org.example
+package org.example.Mapas
+
+import org.example.Combates.Peleas
+import org.example.Entrenamiento.*
+import org.example.Estadisticas.Dificultad
+import org.example.Personajes.Gottens
+import org.example.Personajes.Villanos
+import org.example.limpiarConsola
 
 class Movimiento {
     private var filaActual = 2
@@ -6,7 +13,7 @@ class Movimiento {
     var mapaTemporal: Mapa = Casa()
     private var nuevaColumna = 0
     private var nuevaFila = 0
-    fun mover(gottens: Gottens,villanos: Villanos,dificultad: Dificultad) {
+    fun mover(gottens: Gottens, villanos: Villanos, dificultad: Dificultad) {
 
         mapaTemporal.mostrarMapa()
         print("Movimiento(w,a,s,d): ")

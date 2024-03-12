@@ -1,5 +1,12 @@
-package org.example
+package org.example.Combates
 
+import org.example.Entrenamiento.Pelea
+import org.example.Estadisticas.Dificultad
+import org.example.Estadisticas.Estadisticas
+import org.example.Estadisticas.Razas
+import org.example.Mapas.Movimiento
+import org.example.Personajes.Gottens
+import org.example.Personajes.Villanos
 import kotlin.random.Random
 
 class Peleas(private val gottens: Gottens, private val villanos: Villanos, private val dificultad: Dificultad) {
@@ -70,7 +77,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
             when (ataqueElegido){
                 TipoAtaques.BOLAS -> bolas(gottens.estadisticas)
                 TipoAtaques.KAMEKAMEHA -> kamekameha(gottens.estadisticas)
-                TipoAtaques.KAIOKEN-> kaioKen(gottens.estadisticas)
+                TipoAtaques.KAIOKEN -> kaioKen(gottens.estadisticas)
                 TipoAtaques.GOLPES -> golpes(gottens.estadisticas)
                 else -> println("A fallado")
             }
@@ -100,7 +107,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
 
-    private fun ataqueBoss(estadisticas: Estadisticas,ataque:TipoAtaques){
+    private fun ataqueBoss(estadisticas: Estadisticas, ataque: TipoAtaques){
         println("El villano Saiyan va realizar un ataque")
         when (ataque){
             TipoAtaques.CASTIGODIVINO -> castigoDivino(estadisticas)
@@ -111,7 +118,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
         }
     }
 
-    private fun ataqueSaiyan(estadisticas: Estadisticas,ataque:TipoAtaques){
+    private fun ataqueSaiyan(estadisticas: Estadisticas, ataque: TipoAtaques){
         println("El villano Saiyan va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)
@@ -123,7 +130,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
 
-    private fun ataqueTerricola(estadisticas: Estadisticas,ataque:TipoAtaques){
+    private fun ataqueTerricola(estadisticas: Estadisticas, ataque: TipoAtaques){
         println("El villano Terricola va realizar un ataque")
         when (ataque){
             TipoAtaques.GOLPES -> golpes(estadisticas)
@@ -132,7 +139,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
 
-    private fun ataqueNamekiano(estadisticas: Estadisticas,ataque:TipoAtaques){
+    private fun ataqueNamekiano(estadisticas: Estadisticas, ataque: TipoAtaques){
         println("El villano Namekiano va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)
@@ -144,7 +151,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
 
-    private fun ataqueFreezer(estadisticas: Estadisticas,ataque:TipoAtaques){
+    private fun ataqueFreezer(estadisticas: Estadisticas, ataque: TipoAtaques){
         println("El villano Namekiano va realizar un ataque")
         when (ataque){
             TipoAtaques.BOLAS -> bolas(estadisticas)

@@ -1,4 +1,9 @@
-package org.example
+package org.example.Mapas
+
+import org.example.Estadisticas.Dificultad
+import org.example.Estadisticas.Generos
+import org.example.Estadisticas.Razas
+import org.example.Personajes.Villanos
 
 class Pueblo : Mapa() {
     init {

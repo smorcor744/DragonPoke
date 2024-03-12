@@ -1,8 +1,10 @@
-package org.example
+package org.example.Personajes
 
-class Villanos(var raza: Razas,var nombre: String,genero: Generos,dificultad: Dificultad):EstadisticasSegunGenero(){
+import org.example.Estadisticas.*
+
+class Villanos(var raza: Razas, var nombre: String, genero: Generos, dificultad: Dificultad): EstadisticasSegunGenero(){
     var estadisticas = estadisticasIniciales(genero, dificultad)
-    override fun estadisticasIniciales(genero: Generos,dificultad: Dificultad): Estadisticas {
+    override fun estadisticasIniciales(genero: Generos, dificultad: Dificultad): Estadisticas {
         estadisticas = when (dificultad){
             Dificultad.EXTREMO -> Estadisticas(salud*3, ki*3, stamina*3, velocidad*3, nivel, fuerza*3, ki,
                 stamina)

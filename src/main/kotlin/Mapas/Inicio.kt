@@ -1,4 +1,6 @@
-package org.example
+package org.example.Mapas
+
+import org.example.limpiarConsola
 
 class Inicio : Mapa() {
     override fun mostrarMapa() {

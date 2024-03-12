@@ -1,4 +1,4 @@
-package org.example
+package org.example.Mapas
 
 open class Mapa {
     open var mapa: MutableList<MutableList<String>> = mutableListOf()

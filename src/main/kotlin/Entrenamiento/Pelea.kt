@@ -2,9 +2,9 @@ package org.example.Entrenamiento
 
 import org.example.Personajes.Gottens
 import org.example.Mapas.Mapa
-import org.example.Personajes.Villanos
+import org.example.Personajes.Villano
 
-class Pelea(gottens: Gottens, villanos: Villanos) : Mapa() {
+class Pelea(gottens: Gottens, villanos: Villano) : Mapa() {
     override fun mostrarMapa() {
         println(pelea)
     }

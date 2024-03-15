@@ -14,6 +14,7 @@ open class EstadisticasSegunGenero {
         var velocidadApache = 5.0
         var ki: Double = nivelKi
         var stamina = nivelstamina
+        var saludMaxima = salud
     }
 
 
@@ -23,15 +24,18 @@ open class EstadisticasSegunGenero {
         return when (genero) {
             Generos.MASCULINO, Generos.NO_BINARIO -> Estadisticas(
                 salud * nivel, ki * nivel, stamina * nivel, velocidad * nivel, nivel, fuerza * nivel, nivelKi * nivel,
-                nivelstamina * nivel
+                nivelstamina * nivel,
+                saludMaxima * nivel
             )
             Generos.FEMENINO -> Estadisticas(
                 salud * nivel, ki * nivel, stamina * nivel, velocidadFemina * nivel, nivel, fuerzaFemina * nivel, nivelKi * nivel,
-                nivelstamina * nivel
+                nivelstamina * nivel,
+                saludMaxima * nivel
             )
             Generos.AH_64_APACHE -> Estadisticas(
                 salud * nivel, ki * nivel, stamina * nivel, velocidadApache * nivel, nivel , fuerzaApache * nivel, nivelKi * nivel,
-                nivelstamina * nivel
+                nivelstamina * nivel,
+                saludMaxima * nivel
             )
         }
     }

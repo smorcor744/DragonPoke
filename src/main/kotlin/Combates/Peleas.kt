@@ -6,36 +6,43 @@ import org.example.Estadisticas.Estadisticas
 import org.example.Estadisticas.Razas
 import org.example.Mapas.Movimiento
 import org.example.Personajes.Gottens
-import org.example.Personajes.Villanos
+import org.example.Personajes.Villano
 import org.example.Consola
 
 import kotlin.random.Random
 
-class Peleas(private val gottens: Gottens, private val villanos: Villanos, private val dificultad: Dificultad) {
+class Peleas(private val gottens: Gottens, private val villano: Villano, private val dificultad: Dificultad) {
     private var danio = 0.0
     private var turno = turno(dificultad)
 
 
-    fun pelear() {
-        while (gottens.estadisticas.salud > 0 && villanos.estadisticas.salud > 0) {
+    fun pelear(): Boolean {
+        while (gottens.estadisticas.salud > 0 && villano.estadisticas.salud > 0) {
 
-            Pelea(gottens,villanos).mostrarMapa()
-            iniciarPelea(gottens, villanos )
+            Pelea(gottens,villano).mostrarMapa()
+            iniciarPelea(gottens, villano )
             Consola().printer("Estado actual de la pelea:")
             Consola().printer("Vida de Gottens: ${gottens.estadisticas.salud}")
-            Consola().printer("Vida del villano: ${villanos.estadisticas.salud}")
+            Consola().printer("Vida del villano: ${villano.estadisticas.salud}")
+            readln()
         }
 
         if (gottens.estadisticas.salud <= 0) {
             Consola().printer("¡Has perdido la pelea!")
-            Movimiento().mover(gottens, villanos, dificultad)
+            return false
+
         } else {
             Consola().printer("¡Has ganado la pelea!")
             gottens.estadisticas.nivel += 10
             Consola().printer("Estado actual: ${ gottens.estadisticas }")
+            return true
+
 
         }
     }
+
+
+
 
 
 
@@ -51,7 +58,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
         }
     }
 
-    private fun iniciarPelea(gottens: Gottens, villanos: Villanos){
+    private fun iniciarPelea(gottens: Gottens, villanos: Villano){
         if (turno == 1) {
             turno++
 
@@ -94,7 +101,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
 
-    private fun ataquesVillano(villanos: Villanos, ataque: TipoAtaques){
+    private fun ataquesVillano(villanos: Villano, ataque: TipoAtaques){
         when (villanos.raza){
             Razas.SAIYAN -> ataqueSaiyan(villanos.estadisticas,ataque)
             Razas.TERRICOLA -> ataqueTerricola(villanos.estadisticas,ataque)

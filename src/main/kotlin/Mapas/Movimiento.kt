@@ -4,7 +4,7 @@ import org.example.Combates.Peleas
 import org.example.Entrenamiento.*
 import org.example.Estadisticas.Dificultad
 import org.example.Personajes.Gottens
-import org.example.Personajes.Villanos
+import org.example.Personajes.Villano
 import org.example.limpiarConsola
 
 class Movimiento {
@@ -16,6 +16,16 @@ class Movimiento {
         var mapaTemporal: Mapa = Casa()
 
     }
+    fun moverACasa(gottens: Gottens) {
+        mapaTemporal = Casa()
+        gottens.estadisticas.salud = gottens.estadisticas.saludMaxima
+        // Actualiza la posición del jugador a la posición de la casa
+        nuevaFila = 6
+        nuevaColumna = 1
+    }
+
+
+
     private fun teleport(direccion: String) {
         when (direccion) {
             "ñ" -> {
@@ -24,7 +34,7 @@ class Movimiento {
                 println("2. Casa")
                 println("3. Gym")
 
-                val opcion = readLine()?.trim()
+                val opcion = readln()
 
                 when (opcion) {
                     "1" -> {
@@ -33,7 +43,9 @@ class Movimiento {
                                 println("Teletransportando al Pueblo...")
                                 mapaTemporal = Pueblo()
                                 nuevaFila = 7
-                                nuevaColumna = 36
+                                nuevaColumna = 20
+                                mapaTemporal.mapa[7][36] = " "
+
                             }
                             is Pueblo -> {
                                 println("Ya estás en el pueblo.")
@@ -42,9 +54,8 @@ class Movimiento {
                             is Gym -> {
                                 println("Teletransportando al Pueblo...")
                                 mapaTemporal = Pueblo()
-                                nuevaFila = 7
-                                nuevaColumna = 27
-                                columnaActual = nuevaColumna
+                                filaActual = 7
+                                columnaActual = 27
                                 mapaTemporal.mapa[7][36] = " "
                             }
                         }
@@ -55,9 +66,8 @@ class Movimiento {
                             is Pueblo -> {
                                 println("Teletransportando a la Casa...")
                                 mapaTemporal = Casa()
-                                nuevaFila = 6
-                                nuevaColumna = 1
-                                columnaActual = nuevaColumna
+                                filaActual = 6
+                                columnaActual = 1
                                 mapaTemporal.mapa[2][6] = " "
                             }
                             is Casa -> {
@@ -73,9 +83,8 @@ class Movimiento {
                                 println("Teletransportando al Gym...")
                                 println("Aquí podrás entrenar tus estadísticas como el ki, la fuerza, la velocidad y la resistencia en las diferentes estaciones....")
                                 mapaTemporal = Gym()
-                                nuevaFila = 6
-                                nuevaColumna = 1
-                                columnaActual = nuevaColumna
+                                filaActual = 6
+                                columnaActual = 1
                             }
                             is Gym -> {
                                 println("Ya estás en el Gym.")
@@ -85,16 +94,17 @@ class Movimiento {
                         println("¡Teletransportación al Gym exitosa!")
                     }
                     else -> {
-                        println("Opción no válida.")
+                        println("Dirección de teletransporte no válida(1,2,3).")
+
                     }
                 }
             }
-            else -> println("Dirección de teletransporte no válida.")
         }
     }
 
 
-    fun mover(gottens: Gottens, villanos: Villanos, dificultad: Dificultad) {
+    fun mover(gottens: Gottens, villanos: MutableMap<Pair<Int,Int>,Villano>, dificultad: Dificultad) {
+
 
         mapaTemporal.mostrarMapa()
         print("Movimiento(w,a,s,d): ")
@@ -136,7 +146,7 @@ class Movimiento {
         }
     }
 
-    private fun cambioMapa(fila: Int, columna: Int, mapa: Mapa, gottens: Gottens, villanos: Villanos, dificultad: Dificultad) {
+    private fun cambioMapa(fila: Int, columna: Int, mapa: Mapa, gottens: Gottens, villanos: MutableMap<Pair<Int,Int>,Villano>, dificultad: Dificultad) {
         when (mapa) {
             is Casa -> if ((fila == 6 || fila == 7) && columna == 0) {
                 limpiarConsola()
@@ -168,12 +178,23 @@ class Movimiento {
                     if (pelea(fila, columna, mapa)){
                         limpiarConsola()
                         println("Has entrado en un combate")
-                        mapaTemporal = Pelea(gottens,villanos)
-                        Peleas(gottens,villanos, dificultad).pelear()
-                        mapaTemporal = Pueblo()
-                        nuevaFila = 19
-                        nuevaColumna = 13
-                        columnaActual = nuevaColumna
+                        val villano: Villano? = villanos[fila to columna]
+                        mapaTemporal = villano?.let { Pelea(gottens, it) }!!
+                        Peleas(gottens,villano, dificultad).pelear()
+                        if (Peleas(gottens,villano, dificultad).pelear()) {
+                            villanos.remove(villano.posicion)
+                            mapaTemporal = Pueblo()
+                            nuevaFila = fila
+                            nuevaColumna = columna
+                            columnaActual = nuevaColumna
+                            mapaTemporal.mapa[fila][columna] = " "
+                        }  else {
+                            mapaTemporal = Casa()
+                            filaActual = 2
+                            columnaActual = 6
+                            nuevaColumna = 0
+                            nuevaFila = 0
+                        }
 
                     } else
                         if (columna == 20 && (fila == 9 || fila == 7|| fila == 8)){
@@ -182,8 +203,7 @@ class Movimiento {
                         }
             is Gym -> if ((fila == 6 || fila == 7) && columna == 0) {
                 limpiarConsola()
-                println("Gym")
-                println("Aquí podrás entrenar tus estadísticas como el ki, la fuerza, la velocidad y la resistencia en las diferentes estaciones....")
+                println("Atlas")
                 mapaTemporal = Pueblo()
                 nuevaFila = 7
                 nuevaColumna = 27

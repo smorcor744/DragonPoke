@@ -3,10 +3,7 @@ package org.example.Mapas
 
 
 class Pueblo : Mapa() {
-    fun eliminarVillano(fila:Int,columna:Int){
-        mapa[fila][columna] = " "
-        mapa[7][36] = " "
-    }
+
 
     override var mapa: MutableList<MutableList<String>> = mutableListOf(
         mutableListOf("#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"),

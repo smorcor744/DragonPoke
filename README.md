@@ -112,4 +112,5 @@ https://github.com/smorcor744/DragonPoke/blob/75b789781d636461ff63a9e4df1631e192
 
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
-
+  Lo que he echo a sido he creado la clase consola para que printe todos los mensajes que le venga pero no me a dado tiempo de implementarla en mi codigo
+https://github.com/smorcor744/DragonPoke/blob/1e178e4f843a4933bf2aa67f5654ba15f6046d5b/src/main/kotlin/Consola.kt#L3-L9

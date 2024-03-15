@@ -18,7 +18,7 @@ fun limpiarConsola() {
 }
 
 /**
- * Función para limpiar la consola imprimiendo varias líneas en blanco.
+ * Función para crear un mapa con las posiciones y los villanos.
  */
 fun villanoss():MutableMap<Pair<Int,Int>,Villano>{
     val villano1 = Villano(Razas.TERRICOLA, "Tenshinhan Bizco", Generos.MASCULINO, Dificultad.PUSSY,13 to 19)

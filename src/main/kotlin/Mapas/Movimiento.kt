@@ -19,9 +19,9 @@ class Movimiento {
     fun moverACasa(gottens: Gottens) {
         mapaTemporal = Casa()
         gottens.estadisticas.salud = gottens.estadisticas.saludMaxima
-        // Actualiza la posición del jugador a la posición de la casa
         nuevaFila = 6
         nuevaColumna = 1
+        mapaTemporal.mapa[6][1] = " "
     }
 
 
@@ -189,11 +189,7 @@ class Movimiento {
                             columnaActual = nuevaColumna
                             mapaTemporal.mapa[fila][columna] = " "
                         }  else {
-                            mapaTemporal = Casa()
-                            filaActual = 2
-                            columnaActual = 6
-                            nuevaColumna = 0
-                            nuevaFila = 0
+                            moverACasa(gottens)
                         }
 
                     } else

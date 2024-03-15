@@ -6,7 +6,6 @@ class Pueblo : Mapa() {
 
     fun eliminarVillano(fila:Int,columna:Int){
         mapa[fila][columna] = " "
-
     }
 
     override var mapa: MutableList<MutableList<String>> = mutableListOf(

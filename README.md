@@ -66,7 +66,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
-Para instaciar los villanos que hay lo que he echo a sido hacer una funcion que contiene una instanciación de todos los villanos y despues añadirlos a un mapa donde la clave es un Pair con las filas y columnas
+   Para instaciar los villanos que hay lo que he echo a sido hacer una funcion que contiene una instanciación de todos los villanos y despues añadirlos a un mapa donde la clave es un Pair con las filas y columnas
 https://github.com/smorcor744/DragonPoke/blob/75b789781d636461ff63a9e4df1631e192366507/src/main/kotlin/Main.kt#L23-L34
 Y despues la he iniciado en el main dandole un value
 https://github.com/smorcor744/DragonPoke/blob/75b789781d636461ff63a9e4df1631e192366507/src/main/kotlin/Main.kt#L56
@@ -75,7 +75,7 @@ https://github.com/smorcor744/DragonPoke/blob/75b789781d636461ff63a9e4df1631e192
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
-- Lo que he echo a sido generar las estadisticas en un companion object para que se vayan actualizando comforme entrenas o subes de nivel
+   Lo que he echo a sido generar las estadisticas en un companion object para que se vayan actualizando comforme entrenas o subes de nivel
 https://github.com/smorcor744/DragonPoke/blob/75b789781d636461ff63a9e4df1631e192366507/src/main/kotlin/Estadisticas/EstadisticasSegunGenero.kt#L7-L28
 
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?

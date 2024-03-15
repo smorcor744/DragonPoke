@@ -1,0 +1,30 @@
+import org.example.Estadisticas.Dificultad
+import org.example.Mapas.Mapa
+import org.example.Mapas.Movimiento
+import org.example.Personajes.Gottens
+import org.example.Personajes.Villano
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
+
+class MovimientoTest {
+
+    @Test
+    fun testMover() {
+        val input = ByteArrayInputStream("w".toByteArray())
+        val output = ByteArrayOutputStream()
+        System.setIn(input)
+        System.setOut(PrintStream(output))
+
+        val gottens = Gottens(Generos.MASCULINO, "Goku", Dificultad.NORMAL)
+        val villanos = mutableMapOf<Pair<Int, Int>, Villano>()
+        val mapa = Mapa()
+        val movimiento = Movimiento()
+
+        movimiento.mover(gottens, villanos, Dificultad.NORMAL)
+
+        assertEquals("Movimiento(w,a,s,d): ", output.toString().trim())
+    }
+}

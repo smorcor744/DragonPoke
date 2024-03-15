@@ -55,12 +55,12 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
         if (turno == 1) {
             turno++
 
-            Consola().printer("Elige un ataque:\n1. BOLAS\n2. KAMEKAMEHA\n3. KAIOKEN\n4. GOLPES")
+            println("Elige un ataque:\n1. BOLAS\n2. KAMEKAMEHA\n3. KAIOKEN\n4. GOLPES")
 
             var ataqueElegido: TipoAtaques? = null
 
             while (ataqueElegido == null) {
-                val opcion = Consola().leer().toString()
+                val opcion = readln()
                 ataqueElegido = when (opcion) {
                     "1" -> TipoAtaques.BOLAS
                     "2" -> TipoAtaques.KAMEKAMEHA
@@ -161,7 +161,7 @@ class Peleas(private val gottens: Gottens, private val villanos: Villanos, priva
     }
 
     private fun puedeRealizarAtaque(estadisticas: Estadisticas, costoKi: Int, costoStamina: Int): Boolean {
-        return estadisticas.ki >= costoKi || estadisticas.stamina >= costoStamina
+        return estadisticas.ki >= costoKi && estadisticas.stamina >= costoStamina
     }
 
     private fun recargarEstadisticas(estadisticas: Estadisticas) {

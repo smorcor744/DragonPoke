@@ -10,14 +10,96 @@ import org.example.limpiarConsola
 class Movimiento {
     private var filaActual = 2
     private var columnaActual = 6
-    var mapaTemporal: Mapa = Casa()
     private var nuevaColumna = 0
     private var nuevaFila = 0
+    companion object{
+        var mapaTemporal: Mapa = Casa()
+
+    }
+    private fun teleport(direccion: String) {
+        when (direccion) {
+            "ñ" -> {
+                println("Selecciona tu destino:")
+                println("1. Pueblo")
+                println("2. Casa")
+                println("3. Gym")
+
+                val opcion = readLine()?.trim()
+
+                when (opcion) {
+                    "1" -> {
+                        when (mapaTemporal) {
+                            is Casa -> {
+                                println("Teletransportando al Pueblo...")
+                                mapaTemporal = Pueblo()
+                                nuevaFila = 7
+                                nuevaColumna = 36
+                            }
+                            is Pueblo -> {
+                                println("Ya estás en el pueblo.")
+                                return
+                            }
+                            is Gym -> {
+                                println("Teletransportando al Pueblo...")
+                                mapaTemporal = Pueblo()
+                                nuevaFila = 7
+                                nuevaColumna = 27
+                                columnaActual = nuevaColumna
+                                mapaTemporal.mapa[7][36] = " "
+                            }
+                        }
+                        println("¡Teletransportación al Pueblo exitosa!")
+                    }
+                    "2" -> {
+                        when (mapaTemporal) {
+                            is Pueblo -> {
+                                println("Teletransportando a la Casa...")
+                                mapaTemporal = Casa()
+                                nuevaFila = 6
+                                nuevaColumna = 1
+                                columnaActual = nuevaColumna
+                                mapaTemporal.mapa[2][6] = " "
+                            }
+                            is Casa -> {
+                                println("Ya estás en la casa.")
+                                return
+                            }
+                        }
+                        println("¡Teletransportación a la Casa exitosa!")
+                    }
+                    "3" -> {
+                        when (mapaTemporal) {
+                            is Pueblo -> {
+                                println("Teletransportando al Gym...")
+                                println("Aquí podrás entrenar tus estadísticas como el ki, la fuerza, la velocidad y la resistencia en las diferentes estaciones....")
+                                mapaTemporal = Gym()
+                                nuevaFila = 6
+                                nuevaColumna = 1
+                                columnaActual = nuevaColumna
+                            }
+                            is Gym -> {
+                                println("Ya estás en el Gym.")
+                                return
+                            }
+                        }
+                        println("¡Teletransportación al Gym exitosa!")
+                    }
+                    else -> {
+                        println("Opción no válida.")
+                    }
+                }
+            }
+            else -> println("Dirección de teletransporte no válida.")
+        }
+    }
+
+
     fun mover(gottens: Gottens, villanos: Villanos, dificultad: Dificultad) {
 
         mapaTemporal.mostrarMapa()
         print("Movimiento(w,a,s,d): ")
         val direccion = readln().lowercase()
+        teleport(direccion)
 
         nuevaFila = when (direccion) {
             "w" -> filaActual - 1

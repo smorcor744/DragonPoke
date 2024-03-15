@@ -16,18 +16,18 @@ fun limpiarConsola() {
 }
 
 fun main() {
-    Inicio().mostrarMapa()
-    println("Ingresa tu nombre: ")
-    val nombre = readln()
+//    Inicio().mostrarMapa()
+//    println("Ingresa tu nombre: ")
+//    val nombre = readln()
+//
+//    println("Selecciona tu género (MASCULINO, FEMENINO, NO_BINARIO, AH_64_APACHE): ")
+//    val genero = Generos.valueOf(readln().uppercase())
+//
+//    println("Selecciona la dificultad (EXTREMO, DIFICIL, NORMAL, PUSSY): ")
+//    val dificultad = Dificultad.valueOf(readln().uppercase())
 
-    println("Selecciona tu género (MASCULINO, FEMENINO, NO_BINARIO, AH_64_APACHE): ")
-    val genero = Generos.valueOf(readln().uppercase())
-
-    println("Selecciona la dificultad (EXTREMO, DIFICIL, NORMAL, PUSSY): ")
-    val dificultad = Dificultad.valueOf(readln().uppercase())
-
-    val gottens = Gottens(genero, nombre,dificultad)
-    val villano = Villanos(Razas.NAMEKIANO, "perro", Generos.MASCULINO,dificultad)
+    val gottens = Gottens(Generos.MASCULINO, "nombre",Dificultad.NORMAL)
+    val villano = Villanos(Razas.NAMEKIANO, "perro", Generos.MASCULINO,Dificultad.NORMAL)
 
     println("¡Bievenido ${gottens.nombre}!")
     println("Estadísticas iniciales: ${gottens.estadisticas}")
@@ -35,7 +35,7 @@ fun main() {
     val movimiento = Movimiento()
 
     while (true) {
-        movimiento.mover(gottens,villano,dificultad)
+        movimiento.mover(gottens,villano,Dificultad.NORMAL)
 
     }
 

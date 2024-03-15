@@ -1,3 +1,26 @@
 package org.example.Estadisticas
 
-enum class Generos { MASCULINO, FEMENINO, NO_BINARIO, AH_64_APACHE}
+/**
+ * Enumeración que representa diferentes géneros de personajes.
+ */
+enum class Generos {
+    /**
+     * Género masculino.
+     */
+    MASCULINO,
+
+    /**
+     * Género femenino.
+     */
+    FEMENINO,
+
+    /**
+     * Género no binario.
+     */
+    NO_BINARIO,
+
+    /**
+     * Género Apache.
+     */
+    AH_64_APACHE
+}

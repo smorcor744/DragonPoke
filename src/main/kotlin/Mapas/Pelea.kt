@@ -1,13 +1,25 @@
-package org.example.Entrenamiento
+package org.example.Mapas
 
 import org.example.Personajes.Gottens
 import org.example.Mapas.Mapa
 import org.example.Personajes.Villano
 
-class Pelea(gottens: Gottens, villanos: Villano) : Mapa() {
+/**
+ * Clase que representa una pelea entre Gottens y un villano en el mapa.
+ * @param gottens El personaje principal Gottens.
+ * @param villano El villano contra el que pelea Gottens.
+ */
+class Pelea(gottens: Gottens,
+            villanos: Villano) : Mapa() {
+    /**
+     * Función que muestra el mapa de la pelea entre Gottens y el villano.
+     */
     override fun mostrarMapa() {
         println(pelea)
     }
+    /**
+     * Mapa de la pelea entre Gottens y el villano, con información sobre salud, ki y resistencia de cada uno.
+     */
     override var pelea = "" +
             "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
             "--------------------------------------------------------------------------------------------\n" +

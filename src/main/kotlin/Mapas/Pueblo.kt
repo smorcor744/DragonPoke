@@ -1,9 +1,16 @@
 package org.example.Mapas
 
 
+/**
+ * Clase que representa el pueblo en el mapa.
 
+ */
 class Pueblo : Mapa() {
-
+    /**
+     * Elimina un villano del mapa en la posición especificada.
+     * @param fila La fila en la que se encuentra el villano.
+     * @param columna La columna en la que se encuentra el villano.
+     */
     fun eliminarVillano(fila:Int,columna:Int){
         mapa[fila][columna] = " "
     }

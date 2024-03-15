@@ -1,5 +1,7 @@
 package org.example.Mapas
-
+/**
+ * Clase que representa el gym en el mapa.
+ */
 class Gym : Mapa() {
     override var mapa: MutableList<MutableList<String>> = mutableListOf(
         mutableListOf("#", "#", "#", "-", "-", "#", "#", "#", "#", "#", "-", "-", "#", "#", "#"),

@@ -1,8 +1,13 @@
 package org.example.Mapas
 
 import org.example.limpiarConsola
-
+/**
+ * Clase que representa el inicio del juego en el mapa.
+ */
 class Inicio : Mapa() {
+    /**
+     * Función que muestra el mapa Inicio.
+     */
     override fun mostrarMapa() {
         println(pelea)
         readln()

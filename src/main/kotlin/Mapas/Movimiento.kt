@@ -3,19 +3,28 @@ package org.example.Mapas
 import org.example.Combates.Peleas
 import org.example.Entrenamiento.*
 import org.example.Estadisticas.Dificultad
+import org.example.Estadisticas.Estadisticas
+import org.example.Estadisticas.Porcentajes
 import org.example.Personajes.Gottens
 import org.example.Personajes.Villano
 import org.example.limpiarConsola
 
+/**
+ * Clase que maneja el movimiento del personaje en el juego.
+ */
 class Movimiento {
     private var filaActual = 2
     private var columnaActual = 6
     private var nuevaColumna = 0
     private var nuevaFila = 0
-    companion object{
-        var mapaTemporal: Mapa = Casa()
 
+    companion object {
+        var mapaTemporal: Mapa = Casa()
     }
+
+    /**
+     * Mueve al personaje a la casa.
+     */
     private fun moverACasa(gottens: Gottens) {
         mapaTemporal = Casa()
         gottens.estadisticas.salud = gottens.estadisticas.saludMaxima
@@ -24,6 +33,9 @@ class Movimiento {
         mapaTemporal.mapa[2][6] = " "
     }
 
+    /**
+     * Mueve al personaje al gimnasio.
+     */
     private fun moverAGym() {
         mapaTemporal = Gym()
         nuevaFila = 7
@@ -31,6 +43,9 @@ class Movimiento {
         columnaActual = nuevaColumna
     }
 
+    /**
+     * Mueve al personaje al pueblo.
+     */
     private fun moverAPueblo() {
         mapaTemporal = Pueblo()
         nuevaFila = 7
@@ -39,9 +54,10 @@ class Movimiento {
         mapaTemporal.mapa[7][36] = " "
     }
 
-
-
-    private fun teleport(direccion: String,gottens: Gottens) {
+    /**
+     * Teleporta al personaje a diferentes ubicaciones.
+     */
+    private fun teleport(direccion: String, gottens: Gottens) {
         when (direccion) {
             "ñ" -> {
                 println("Selecciona tu destino:")
@@ -105,13 +121,18 @@ class Movimiento {
         }
     }
 
-
-    fun mover(gottens: Gottens, villanos: MutableMap<Pair<Int,Int>,Villano>, dificultad: Dificultad) {
-
+    /**
+     * Mueve al personaje y maneja las interacciones del mapa.
+     */
+    fun mover(
+        gottens: Gottens,
+        villanos: MutableMap<Pair<Int, Int>, Villano>,
+        dificultad: Dificultad,
+    ) {
         mapaTemporal.mostrarMapa()
         print("Movimiento(w,a,s,d): ")
         val direccion = readln().lowercase()
-        teleport(direccion,gottens)
+        teleport(direccion, gottens)
 
         nuevaFila = when (direccion) {
             "w" -> filaActual - 1
@@ -127,10 +148,10 @@ class Movimiento {
 
         if (esMovimientoValido(nuevaFila, nuevaColumna, mapaTemporal)) {
             if (esCeldaEntrenamiento(mapaTemporal.mapa[nuevaFila][nuevaColumna])) {
-                tipoEntrenamiento(mapaTemporal.mapa[nuevaFila][nuevaColumna])
+                tipoEntrenamiento(gottens.estadisticas, dificultad)
                 println(gottens.estadisticas)
             } else {
-                cambioMapa(nuevaFila, nuevaColumna, mapaTemporal,gottens,villanos, dificultad )
+                cambioMapa(nuevaFila, nuevaColumna, mapaTemporal, gottens, villanos, dificultad)
                 mapaTemporal.moverPersonaje(filaActual, columnaActual, nuevaFila, nuevaColumna)
                 filaActual = nuevaFila
                 columnaActual = nuevaColumna
@@ -140,7 +161,9 @@ class Movimiento {
         }
     }
 
-
+    /**
+     * Maneja el cambio de mapa según la posición del personaje.
+     */
     private fun cambioMapa(
         fila: Int,
         columna: Int,
@@ -201,36 +224,30 @@ class Movimiento {
         }
     }
 
+    /**
+     * Verifica si la celda es de entrenamiento.
+     */
     private fun esCeldaEntrenamiento(celda: String): Boolean {
         return celda == "K" || celda == "F" || celda == "R" || celda == "V"
     }
 
-    private fun tipoEntrenamiento(celda: String) {
-        when (celda) {
-            "K" -> Ki()
-            "F" -> Fuerza()
-            "R" -> Resistencia()
-            "V" -> Velocidad()
+    /**
+     * Realiza el tipo de entrenamiento según la celda en el mapa.
+     */
+    private fun tipoEntrenamiento(estadisticas: Estadisticas, dificultad: Dificultad) {
+        when (mapaTemporal.mapa[nuevaFila][nuevaColumna]) {
+            "K" -> Ki().entrenar(estadisticas, dificultad)
+            "F" -> Fuerza().entrenar(estadisticas, dificultad)
+            "R" -> Resistencia().entrenar(estadisticas, dificultad)
+            "V" -> Velocidad().entrenar(estadisticas, dificultad)
         }
     }
 
+    /**
+     * Verifica si el movimiento es válido.
+     */
     private fun esMovimientoValido(fila: Int, columna: Int, mapa: Mapa): Boolean {
         val celda = mapa.mapa[fila][columna]
         return celda != "#" && celda != "|" && celda != "-" && !esCeldaEntrenamiento(celda)
-    }
-
-
-    private fun entrenar(fila: Int, columna: Int, mapa: Mapa): Boolean {
-        return mapa.mapa[fila][columna] == "K" || mapa.mapa[fila][columna] == "F" || mapa.mapa[fila][columna] == "R" || mapa.mapa[fila][columna] == "V"
-
-    }
-
-    private fun tipoEntrenamiento(fila: Int, columna: Int, mapa: Mapa){
-        when (mapa.mapa[fila][columna]){
-            "K" -> Ki()
-            "F" -> Fuerza()
-            "V" -> Velocidad()
-            "R" -> Resistencia()
-        }
     }
 }

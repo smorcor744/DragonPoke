@@ -1,26 +1,33 @@
 package org.example.Combates
 
-import org.example.Entrenamiento.Pelea
+import org.example.Mapas.Pelea
 import org.example.Estadisticas.Dificultad
 import org.example.Estadisticas.Estadisticas
 import org.example.Estadisticas.Razas
-import org.example.Mapas.Movimiento
 import org.example.Personajes.Gottens
 import org.example.Personajes.Villano
 import org.example.Consola
 
 import kotlin.random.Random
 
-class Peleas(private val gottens: Gottens, private val villano: Villano, private val dificultad: Dificultad) {
+/**
+ * Clase que gestiona las peleas entre el personaje principal (Gottens) y los villanos.
+ * @param gottens El personaje principal.
+ * @param villano El villano contra el que lucha Gottens.
+ * @param dificultad La dificultad de la pelea.
+ */
+class Peleas(private val gottens: Gottens, private val villano: Villano, dificultad: Dificultad) {
     private var danio = 0.0
     private var turno = turno(dificultad)
 
-
+    /**
+     * Función que realiza la pelea entre Gottens y el villano.
+     * @return true si Gottens gana la pelea, false si pierde.
+     */
     fun pelear(): Boolean {
         while (gottens.estadisticas.salud > 0 && villano.estadisticas.salud > 0) {
-
-            Pelea(gottens,villano).mostrarMapa()
-            iniciarPelea(gottens, villano )
+            Pelea(gottens, villano).mostrarMapa()
+            iniciarPelea(gottens, villano)
             Consola().printer("Estado actual de la pelea:")
             Consola().printer("Vida de Gottens: ${gottens.estadisticas.salud}")
             Consola().printer("Vida del villano: ${villano.estadisticas.salud}")
@@ -30,42 +37,39 @@ class Peleas(private val gottens: Gottens, private val villano: Villano, private
         if (gottens.estadisticas.salud <= 0) {
             Consola().printer("¡Has perdido la pelea!")
             return false
-
         } else {
             Consola().printer("¡Has ganado la pelea!")
             gottens.estadisticas.nivel += 10
-            Consola().printer("Estado actual: ${ gottens.estadisticas }")
+            Consola().printer("Estado actual: ${gottens.estadisticas}")
             return true
-
-
         }
     }
 
-
-
-
-
-
+    /**
+     * Función que determina el turno de inicio de la pelea según la dificultad.
+     * @param dificultad La dificultad de la pelea.
+     * @return El número que representa el turno (1 para Gottens, 2 para el villano).
+     */
     private fun turno(dificultad: Dificultad): Int {
-        if (dificultad == Dificultad.EXTREMO){
+        return if (dificultad == Dificultad.EXTREMO) {
             Consola().printer("Empieza el villano")
-            return 2
-
+            2
         } else {
             Consola().printer("Empiezas")
-            return 1
-
+            1
         }
     }
 
-    private fun iniciarPelea(gottens: Gottens, villanos: Villano){
+    /**
+     * Función que inicia una ronda de pelea entre Gottens y el villano.
+     * @param gottens El personaje principal.
+     * @param villanos El villano contra el que lucha Gottens.
+     */
+    private fun iniciarPelea(gottens: Gottens, villanos: Villano) {
         if (turno == 1) {
             turno++
-
             println("Elige un ataque:\n1. BOLAS\n2. KAMEKAMEHA\n3. KAIOKEN\n4. GOLPES")
-
             var ataqueElegido: TipoAtaques? = null
-
             while (ataqueElegido == null) {
                 val opcion = readln()
                 ataqueElegido = when (opcion) {
@@ -79,7 +83,7 @@ class Peleas(private val gottens: Gottens, private val villano: Villano, private
                     }
                 }
             }
-            when (ataqueElegido){
+            when (ataqueElegido) {
                 TipoAtaques.BOLAS -> bolas(gottens.estadisticas)
                 TipoAtaques.KAMEKAMEHA -> kamekameha(gottens.estadisticas)
                 TipoAtaques.KAIOKEN -> kaioKen(gottens.estadisticas)
@@ -87,30 +91,29 @@ class Peleas(private val gottens: Gottens, private val villano: Villano, private
                 else -> println("A fallado")
             }
             villanos.estadisticas.salud -= danio
-
         } else {
             turno--
             val ataqueAleatorio = TipoAtaques.entries.toTypedArray().random()
-            ataquesVillano(villanos,ataqueAleatorio)
+            ataquesVillano(villanos, ataqueAleatorio)
             gottens.estadisticas.salud -= danio
             readln()
-
-        }
-
-
-    }
-
-
-    private fun ataquesVillano(villanos: Villano, ataque: TipoAtaques){
-        when (villanos.raza){
-            Razas.SAIYAN -> ataqueSaiyan(villanos.estadisticas,ataque)
-            Razas.TERRICOLA -> ataqueTerricola(villanos.estadisticas,ataque)
-            Razas.NAMEKIANO -> ataqueNamekiano(villanos.estadisticas,ataque)
-            Razas.FREEZER -> ataqueFreezer(villanos.estadisticas,ataque)
-            Razas.BOSS -> ataqueBoss(villanos.estadisticas,ataque)
         }
     }
 
+    /**
+     * Función que realiza un ataque por parte del villano.
+     * @param villanos El villano que realiza el ataque.
+     * @param ataque El tipo de ataque realizado.
+     */
+    private fun ataquesVillano(villanos: Villano, ataque: TipoAtaques) {
+        when (villanos.raza) {
+            Razas.SAIYAN -> ataqueSaiyan(villanos.estadisticas, ataque)
+            Razas.TERRICOLA -> ataqueTerricola(villanos.estadisticas, ataque)
+            Razas.NAMEKIANO -> ataqueNamekiano(villanos.estadisticas, ataque)
+            Razas.FREEZER -> ataqueFreezer(villanos.estadisticas, ataque)
+            Razas.BOSS -> ataqueBoss(villanos.estadisticas, ataque)
+        }
+    }
 
     private fun ataqueBoss(estadisticas: Estadisticas, ataque: TipoAtaques){
         Consola().printer("El villano Saiyan va realizar un ataque")

@@ -1,3 +1,31 @@
 package org.example.Estadisticas
 
-enum class Razas { SAIYAN, TERRICOLA, NAMEKIANO, FREEZER, BOSS }
+/**
+ * Enumeración que representa diferentes razas de personajes.
+ */
+enum class Razas {
+    /**
+     * Raza Saiyan.
+     */
+    SAIYAN,
+
+    /**
+     * Raza Terrícola.
+     */
+    TERRICOLA,
+
+    /**
+     * Raza Namekiano.
+     */
+    NAMEKIANO,
+
+    /**
+     * Raza Freezer.
+     */
+    FREEZER,
+
+    /**
+     * Jefe.
+     */
+    BOSS
+}

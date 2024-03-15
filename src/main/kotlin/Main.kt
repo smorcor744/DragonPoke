@@ -50,13 +50,23 @@ fun main() {
 
     while (true) {
         movimiento.mover(gottens,villanos,Dificultad.NORMAL)
-
+        if (villanos.isEmpty()) {
+            Final().mostrarMensaje()
+        }
     }
 
 
 }
 
-
+class Final {
+    fun mostrarMensaje() {
+        println("¡Felicidades, has derrotado al villano final y has salvado el mundo!")
+        println("El destino del mundo estaba en tus manos, y gracias a tu valentía y determinación, has prevalecido.")
+        println("Tu nombre será recordado por generaciones como el héroe que luchó contra la oscuridad y emergió victorioso.")
+        println("Akira Toriyama, estaría orgulloso de ti por tu coraje y tu espíritu indomable.")
+        println("¡Has demostrado que los límites solo existen en la mente, y que el verdadero poder reside en el corazón!")
+    }
+}
 
 
 

@@ -16,7 +16,7 @@ class Movimiento {
         var mapaTemporal: Mapa = Casa()
 
     }
-    fun moverACasa(gottens: Gottens) {
+    private fun moverACasa(gottens: Gottens) {
         mapaTemporal = Casa()
         gottens.estadisticas.salud = gottens.estadisticas.saludMaxima
         nuevaFila = 6
@@ -187,7 +187,7 @@ class Movimiento {
                             nuevaFila = fila
                             nuevaColumna = columna
                             columnaActual = nuevaColumna
-                            mapaTemporal.mapa[fila][columna] = " "
+                            Pueblo().eliminarVillano(fila,columna)
                         }  else {
                             moverACasa(gottens)
                         }
